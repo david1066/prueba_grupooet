@@ -25,6 +25,8 @@ class UsuarioController extends Controller
     public function create()
     {
         //
+
+       return view('usuario.create');
     }
 
     /**
@@ -35,7 +37,28 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'tipo_documento_id' => 'required|integer',
+            'documento' => 'required|integer|digits_between:4,11|unique:usuarios,documento',
+            'primer_nombre' => 'required|string|max:100',
+            'segundo_nombre' => 'required|string|max:100',
+            'apellidos' => 'required|string|max:150',
+            'direccion' => 'required|string|max:400',
+            'telefono' => 'required|string|min:5|max:10',
+            'ciudad_id' => 'required|integer',
+         ]);
+         $usuario=$request->all();
+         unset($usuario['_token']);
+         unset($usuario['send']);
+         $usuario['user_id']=\Auth::user()->id;
+        if(Usuario::create($usuario)){
+            \Session::put('success','Usuario creado con exito');
+            return view('usuario.create');
+        }else{
+            \Session::put('danger','Error al crear el usuario');
+            return view('usuario.create');
+        }
+
     }
 
     /**
