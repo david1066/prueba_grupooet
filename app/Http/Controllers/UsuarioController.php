@@ -36,7 +36,7 @@ class UsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   //valida los campos
         $this->validate($request, [
             'tipo_documento_id' => 'required|integer',
             'documento' => 'required|integer|digits_between:4,11|unique:usuarios,documento',
@@ -47,10 +47,15 @@ class UsuarioController extends Controller
             'telefono' => 'required|string|min:5|max:10',
             'ciudad_id' => 'required|integer',
          ]);
-         $usuario=$request->all();
-         unset($usuario['_token']);
-         unset($usuario['send']);
-         $usuario['user_id']=\Auth::user()->id;
+
+        //comvierte en un array
+        $usuario=$request->all();
+        //sacamos del array los parametros que no entran 
+        unset($usuario['_token']);
+        unset($usuario['send']);
+        //agregamos el id del usuario que creo el registro
+        $usuario['user_id']=\Auth::user()->id;
+        //creamos el usuario con exito
         if(Usuario::create($usuario)){
             \Session::put('success','Usuario creado con exito');
             return view('usuario.create');
