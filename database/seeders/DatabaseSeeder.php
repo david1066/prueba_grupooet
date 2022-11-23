@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\TipoVehiculo;
 use Illuminate\Database\Seeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        
+        
+        $this->call(CiudadSeeder::class);
+        $this->call(ColorSeeder::class);
+        $this->call(TipoDocumentoSeeder::class);
+        $this->call(TipoVehiculoSeeder::class);
     }
 }
