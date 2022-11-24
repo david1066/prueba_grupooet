@@ -7,6 +7,29 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+<img src="/public/modelo_relacional.jpeg" alt="License">
+
+## Paquetes instalados: composer y npm
+1. fruitcake/laravel-cors: ^2.0
+2. guzzlehttp/guzzle: ^7.0.1
+3. laravel/fortify: ^1.13
+4. laravel/framework: ^8.75
+5. laravel/sanctum: ^2.11
+6. laravel/tinker: ^2.5
+7. laravel/ui: ^3.4
+8. @popperjs/core: ^2.10.2
+9. axios:^0.21
+10. bootstrap: ^5.1.3
+11. laravel-mix: ^6.0.6
+12. lodash: ^4.17.19
+13. postcss: ^8.1.14
+14. resolve-url-loader: ^3.1.2
+15. sass: ^1.32.11
+16. sass-loader: ^11.0.1
+17. vue: ^2.6.12
+18. vue-loader: ^15.9.8
+19. vue-template-compiler: ^2.6.12  
+
 ## Instalación y despliegue
 
 1. Instalar composer y node.js
