@@ -25,7 +25,7 @@
 
                      
         
-                <form  method="{{$method}}" action="@if(empty($usuario)) {{url('usuario')}} @else {{url('usuario',$usuario->id.'/edit')}} @endif " novalidate>
+                <form  method="{{$method}}" action="@if(empty($usuario)) {{url('usuario')}} @else {{url('usuario',base64_encode($usuario->id)).'/edit'}} @endif " novalidate>
         
                     @csrf
         

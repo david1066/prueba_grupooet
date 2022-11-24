@@ -91,7 +91,7 @@ class VehiculoController extends Controller
     public function show( $id)
     {
         //
-        $vehiculo=Vehiculo::whereraw('id = ?',$id)->first();
+        $vehiculo=Vehiculo::whereraw('id = ?', base64_decode($id))->first();
         if(!empty($vehiculo->id)){
             $method='PUT';
           
@@ -126,19 +126,21 @@ class VehiculoController extends Controller
         unset($vehiculo['placa']);
         unset($vehiculo['marca']);
         unset($vehiculo['tipo_vehiculo_id']);
+        
         //agregamos el id del vehiculo que creo el registro
         //guardamos el usuario con exito
-        $exist=Vehiculo::whereraw('id = ?',$id)->first();
+        $exist=Vehiculo::whereraw('id = ?',base64_decode($id))->first();
             
         if(!empty($exist->id)){
             $exist->update($vehiculo);
+          
             
             Cache::put('success', 'Usuario creado con exito', Carbon::now()->addSeconds(5));
             return redirect('vehiculo/'.$id);
         
         }else{
             Cache::put('danger', 'Error al crear el vehiculo', Carbon::now()->addSeconds(5));
-            return redirect('usuario/'.$id);
+            return redirect('vehiculo/'.$id);
             
         }
 
@@ -166,7 +168,7 @@ class VehiculoController extends Controller
     public function destroy($id)
     {
         //
-        $exist=Vehiculo::whereraw('id = ?',$id)->first();
+        $exist=Vehiculo::whereraw('id = ?',  base64_decode($id))->first();
             
         if(!empty($exist->id)){
             $exist->delete();

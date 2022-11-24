@@ -29,7 +29,7 @@
 
                      
         
-                <form  method="{{$method}}" action="@if(empty($vehiculo)) {{url('vehiculo')}} @else {{url('vehiculo',$vehiculo->id.'/edit')}} @endif " novalidate>
+                <form  method="{{$method}}" action="@if(empty($vehiculo)) {{url('vehiculo')}} @else {{url('vehiculo',base64_encode($vehiculo->id)).'/edit'}} @endif " novalidate>
         
                     @csrf
                     

@@ -18,9 +18,10 @@
                           <tr>
                             <th scope="col">Placa</th>
                             <th scope="col">Marca</th>
+                            <th scope="col">Color</th>
                             <th scope="col">Conductor</th>
                             <th scope="col">Propietario</th>
-                            <th scope="col">Fecha</th>
+                            <th scope="col">Fecha creación</th>
                             <th scope="col">Acción</th>
                           </tr>
                         </thead>
@@ -29,14 +30,15 @@
                               <tr>
                                 <th >{{$value->placa}}</th>
                                 <th >{{$value->marca}}</th>
+                                <th >{{$value->color->nombre}}</th>
                                 <th >
-                                    <a href="{{url('usuario',$value->conductor->id)}}">
+                                    <a href="{{url('usuario', base64_encode($value->conductor->id))}}">
                                     {{$value->conductor->primer_nombre}} {{$value->conductor->segundo_nombre}} {{$value->conductor->apellidos}}</a></th>
                                 <th >
-                                    <a href="{{url('usuario',$value->propietario->id)}}">
+                                    <a href="{{url('usuario',base64_encode($value->propietario->id))}}">
                                     {{$value->propietario->primer_nombre}} {{$value->propietario->segundo_nombre}} {{$value->propietario->apellidos}}</a></th>
                                 <th>{{date('Y-m-d',strtotime($value->created_at))}}</th>
-                                <th><a  class="btn btn-info text-white" href="{{url('vehiculo',$value->id)}}">Editar</a>
+                                <th><a  class="btn btn-info text-white" href="{{url('vehiculo',base64_encode($value->id))}}">Editar</a>
                                   
                                     <!-- Button trigger odal -->
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{$value->id}}">
@@ -56,7 +58,7 @@
                                             </div>
                                             <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                            <a onclick="deletes('{{url('vehiculo',$value->id)}}')" class="btn btn-danger" >Sí</a>
+                                            <a onclick="deletes('{{url('vehiculo',base64_encode($value->id))}}')" class="btn btn-danger" >Sí</a>
                                            
                                             </div>
                                         </div>

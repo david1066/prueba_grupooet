@@ -27,7 +27,18 @@
 16. sass-loader: ^11.0.1
 17. vue: ^2.6.12
 18. vue-loader: ^15.9.8
-19. vue-template-compiler: ^2.6.12  
+19. vue-template-compiler: ^2.6.12
+
+## Funcionalidades
+
+1. La eliminación está por softdelete, no sé eliminan los datos.
+2. Los modelos(color, tipodocumento, ciudad, tipovehiculo) se cargan en caché para no estar consultando tanto en base de datos.
+3. Cuando se va a eliminar un vehículo, muestra un modal para confirmar la eliminación o cancelarla.
+4. Cuando se trae un vehículo o un usuario por ID, sé utiliza la estructura whereraw(id = ?,$id) para prevenir injection SQL.
+5. Se creó un login con el paquete FORTIFY y la vistas de laravel UI.
+6. Se validan los campos con la librería VALIDATOR.
+7. La barra de navegación esta visible todo el tiempo cuando el usuario esta logueado.
+8. El sistema no permite duplicados por documento y por placa.
 
 ## Instalación y despliegue
 

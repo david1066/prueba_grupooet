@@ -91,7 +91,7 @@ class UsuarioController extends Controller
     public function show($id)
     {
         
-        $usuario=Usuario::whereraw('id = ?',$id)->first();
+        $usuario=Usuario::whereraw('id = ?',base64_decode($id))->first();
         if(!empty($usuario->id)){
             $method='PUT';
           
@@ -141,9 +141,9 @@ class UsuarioController extends Controller
          unset($usuario['tipo_documento']);
          unset($usuario['documento']);
 
-         
+       
          //guardamos el usuario con exito
-         $exist=Usuario::whereraw('id = ?',$id)->first();
+         $exist=Usuario::whereraw('id = ?',base64_decode($id))->first();
        
          if(!empty($exist->id)){
              $exist->update($usuario);
