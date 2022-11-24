@@ -147,6 +147,9 @@
                     <div class="d-grid mt-3">
                       <input type="submit" name="send" value="Guardar" class="btn btn-dark btn-block">
                     </div>
+                    <div class="d-grid mt-3">
+                        <a href="{{url('home')}}" class="btn btn-light btn-block">Home</a>
+                    </div>
                 </form>
                 </div>
             </div>
