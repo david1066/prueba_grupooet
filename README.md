@@ -7,7 +7,6 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-<img src="/public/modelo_relacional.jpeg" alt="License">
 
 ## Paquetes instalados: composer y npm
 1. fruitcake/laravel-cors: ^2.0
