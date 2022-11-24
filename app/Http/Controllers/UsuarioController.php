@@ -57,15 +57,17 @@ class UsuarioController extends Controller
         //sacamos del array los parametros que no entran 
         unset($usuario['_token']);
         unset($usuario['send']);
+        $method='post';
+
         //agregamos el id del usuario que creo el registro
         $usuario['user_id']=\Auth::user()->id;
         //creamos el usuario con exito
         if(Usuario::create($usuario)){
             Cache::put('success', 'Usuario creado con exito', Carbon::now()->addSeconds(5));
-            return view('usuario.create');
+            return view('usuario.create',compact('method'));
         }else{
             Cache::put('danger', 'Error al crear el usuario', Carbon::now()->addSeconds(5));
-            return view('usuario.create');
+            return view('usuario.create',compact('method'));
         }
       
 

@@ -20,4 +20,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('/usuario', App\Http\Controllers\UsuarioController::class);
+Route::resource('usuario', App\Http\Controllers\UsuarioController::class);
+
+Route::resource('vehiculo', App\Http\Controllers\VehiculoController::class);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

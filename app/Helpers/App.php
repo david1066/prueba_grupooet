@@ -5,6 +5,8 @@ use App\Models\TipoDocumento;
 use App\Models\Ciudad;
 use App\Models\TipoVehiculo;
 use App\Models\Color;
+use App\Models\Usuario;
+use App\Models\Vehiculo;
 
     function getTipoDocumento(){
         
@@ -71,8 +73,27 @@ use App\Models\Color;
         return $colores;
     }
 
+
+    function getUsuario(){
+        
+        
+        $usuarios = Usuario::all();
+          
+       
+        return $usuarios;
+    }
+
+    function getVehiculo(){
+        
+        
+        $vehiculos = Vehiculo::all();
+          
+       
+        return $vehiculos;
+    }
+
    
-    
+
 
 
 

@@ -18,12 +18,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/home') }}">
                     Acma SA
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -33,8 +34,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item ">  <a href="" class="nav-link btn">Crear un nuevo propietario o conductor</a></li>
-                        <li  class="nav-item ">  <a href="" class="nav-link btn">Registrar un vehiculo</a></li>
+                        <li class="nav-item"> <a class="nav-link btn" href="{{ url('/home') }}">
+                          Home
+                        </a></li>
+                        <li class="nav-item ">  <a href="{{url('usuario/create')}}" class="nav-link btn">Crear propietario o conductor</a></li>
+                        <li  class="nav-item ">  <a href="{{url('vehiculo/create')}}" class="nav-link btn">Registrar un vehiculo</a></li>
                            
                         
                     </ul>
