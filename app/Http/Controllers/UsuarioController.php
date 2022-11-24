@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Carbon\Carbon;
 
 class UsuarioController extends Controller
 {
@@ -25,8 +27,10 @@ class UsuarioController extends Controller
     public function create()
     {
         //
+       $method='post';
 
-       return view('usuario.create');
+
+       return view('usuario.create',compact('method'));
     }
 
     /**
@@ -57,49 +61,93 @@ class UsuarioController extends Controller
         $usuario['user_id']=\Auth::user()->id;
         //creamos el usuario con exito
         if(Usuario::create($usuario)){
-            \Session::put('success','Usuario creado con exito');
+            Cache::put('success', 'Usuario creado con exito', Carbon::now()->addSeconds(5));
             return view('usuario.create');
         }else{
-            \Session::put('danger','Error al crear el usuario');
+            Cache::put('danger', 'Error al crear el usuario', Carbon::now()->addSeconds(5));
             return view('usuario.create');
         }
+      
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Usuario  $usuario
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Usuario $usuario)
+    public function show($id)
+    {
+        
+        $usuario=Usuario::whereraw('id = ?',$id)->first();
+        if(!empty($usuario->id)){
+            $method='PUT';
+          
+            return view('usuario.create', compact('usuario','method'));
+        }
+
+        return redirect('/home');
+    }
+
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
     {
         //
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Usuario  $usuario
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Usuario $usuario)
+    public function edit($id, Request $request)
     {
-        //
-    }
+        
+        //valida los campos
+        $this->validate($request, [      
+        'primer_nombre' => 'required|string|max:100',
+        'segundo_nombre' => 'required|string|max:100',
+        'apellidos' => 'required|string|max:150',
+        'direccion' => 'required|string|max:400',
+        'telefono' => 'required|string|min:5|max:10',
+        'ciudad_id' => 'required|integer',
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Usuario  $usuario
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Usuario $usuario)
-    {
-        //
-    }
+         //comvierte en un array
+         $usuario=$request->all();
+         //sacamos del array los parametros que no entran 
+         unset($usuario['_token']);
+         unset($usuario['tipo_documento']);
+         unset($usuario['documento']);
 
+         
+         //guardamos el usuario con exito
+         $exist=Usuario::whereraw('id = ?',$id)->first();
+       
+         if(!empty($exist->id)){
+             $exist->update($usuario);
+             
+             Cache::put('success', 'Usuario creado con exito', Carbon::now()->addSeconds(5));
+             return redirect('usuario/'.$id);
+           
+         }else{
+             Cache::put('danger', 'Error al crear el usuario', Carbon::now()->addSeconds(5));
+             return redirect('usuario/'.$id);
+             
+         }
+     
+       
+    }
     /**
      * Remove the specified resource from storage.
      *
